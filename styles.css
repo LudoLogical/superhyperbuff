@@ -1,7 +1,7 @@
 body {
     font-family: "Muli", sans-serif;
-    background-color: black;
-    color: #939393;
+    background-color: #EEEEEE;
+    color: #333333;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -9,19 +9,31 @@ body {
     min-width: 1020px;
 }
 
-a {
-    color: #d3d3d3;
+h1 {
+    font-size: 60px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-size: 30px;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+a, a:visited {
+    color: #1E90FF;
     text-decoration: none;
     font-weight: bold;
 }
 
 canvas {
     background-color: black;
-    border-bottom: 2px solid white;
+    box-shadow: 0 0 50px #888888;
 }
 
 p {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .decreasebelow {

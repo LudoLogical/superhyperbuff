@@ -46,6 +46,24 @@ var update = function () {
     } else {
         timeInterval--;
     }
+    
+    percent = (kills%20)/20;
+    
+    ctx.strokeStyle = "#333333";
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.arc(800,425,50,1.5*Math.PI,3.5*Math.PI);
+    ctx.stroke();
+    ctx.strokeStyle = "red";
+    ctx.beginPath();
+    ctx.arc(800,425,50,1.5*Math.PI,((percent*2)+1.5)*Math.PI);
+    ctx.stroke();
+    
+    ctx.textAlign = "center";
+    ctx.font = "60px 'Muli'"
+    ctx.fillStyle = "red";
+    ctx.fillText(Math.floor(kills/20),800,447);
+    ctx.textAlign = "left";
 }
 
 spawnEnemy();

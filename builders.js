@@ -68,8 +68,8 @@ class Enemy extends Entity {
         if (player.smashing) {
             if (testcollisionrect(this,player,true)) {
                 this.removeMark = true;
-                score ++;
-                console.log(score);
+                score += this.dmg;
+                kills += this.dmg;
             }
         } else if (testcollisionrect(this,player)) {
             player.hp -= this.dmg;
