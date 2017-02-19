@@ -1,50 +1,3 @@
-//GET CANVAS CONTEXT (FOR MANIPULAITON)
-var ctx = document.getElementById("ctx").getContext("2d");
-
-//GENERAL VARS
-var wpress = false;
-var apress = false;
-var spress = false;
-var dpress = false;
-
-//DOCUMENT FUNCTIONS SETUP
-document.onkeydown = function (e) {
-    switch(e.keyCode) {
-        case 87: //w
-            wpress = true;
-            break;
-        case 65: //a
-            apress = true;
-            break;
-        case 83: //s
-            spress = true;
-            break;
-        case 68: //d
-            dpress = true;
-            break;
-        default: break;
-    }
-};
-
-//MOVE VAR RESET
-document.onkeyup = function (e) {
-    switch(e.keyCode) {
-        case 87: //w
-            wpress = false;
-            break;
-        case 65: //a
-            apress = false;
-            break;
-        case 83: //s
-            spress = false;
-            break;
-        case 68: //d
-            dpress = false;
-            break;
-        default: break;
-    }
-};
-
 //AREA SETUP (MOST SIMPLE TYPE)
 class Area {
     constructor(x,y,w,h) {
@@ -72,6 +25,7 @@ class Entity extends Area {
     }
 }
 
+//ENEMIES SETUP
 class Enemy extends Entity {
     constructor(x,y,w,h,sprite,spd,dmg) {
         super(x,y,w,h,sprite);
@@ -88,51 +42,95 @@ class Enemy extends Entity {
         if (this.x < -this.w) {
             this.removeMark = true;
         }
-        if (testcollisionrect(this,player)) {
+        if (player.smashing) {
+            if (testcollisionrect(this,player,true)) {
+                this.removeMark = true;
+                score ++;
+                console.log(score);
+            }
+        } else if (testcollisionrect(this,player)) {
             player.hp -= this.dmg;
             this.removeMark = true;
         }
     }
 }
 
+//PLAYER SETUP
 class Player extends Entity {
-    constructor(x,y,w,h,sprite,spd) {
-        super(x,y,w,h,sprite);
+    constructor(x,y,w,h,sprite0,sprite1,sprite2,sprite3,spd) {
+        super(x,y,w,h);
+        this.sprites = [new Image(), new Image(), new Image(), new Image()];
+        this.sprites[0].src = sprite0;
+        this.sprites[1].src = sprite1;
+        this.sprites[2].src = sprite2;
+        this.sprites[3].src = sprite3;
         this.spd = spd;
         this.hp = 20;
-        this.atkcool = 20;
+        this.atkcool = 40;
+        this.walkid = 1;
+        this.walkcycle = 10;
+        this.smashing = false;
     }
     updatePos() {
-        if (wpress && this.y > 0) {
-            this.y -= this.spd;
-        }
-        if (apress && this.x > 0) {
-            this.x -= this.spd;
-        }
-        if (spress && this.y + this.h < 500) {
-            this.y += this.spd;
-        }
-        if (dpress && this.x + this.w < 1000) {
-            this.x += this.spd;
+        if (!this.smashing) {
+            if (wpress && this.y > 0) {
+                this.y -= this.spd;
+            }
+            if (apress && this.x > 0) {
+                this.x -= this.spd;
+            }
+            if (spress && this.y + this.h < 500) {
+                this.y += this.spd;
+            }
+            if (dpress && this.x + this.w < 1000) {
+                this.x += this.spd;
+            }
         }
     }
-    update() {
-        this.updatePos();
-        this.draw();
-        if (this.atkcool < 20) {
-            this.atkcool++;
+    draw() {
+        if (this.smashing) {
+            if (this.walkid === 1) {
+                ctx.drawImage(this.sprites[2],this.x,this.y,this.w,this.h);
+            } else {
+                ctx.drawImage(this.sprites[3],this.x,this.y,this.w,this.h);
+            }
+        } else {
+            if (this.walkid === 1) {
+                ctx.drawImage(this.sprites[0],this.x,this.y,this.w,this.h);
+            } else {
+                ctx.drawImage(this.sprites[1],this.x,this.y,this.w,this.h);
+            }
         }
     }
     attack() {
-        if (spacepress && this.atkcool >= 20) {
+        if (spacepress && this.atkcool >= 40) {
+            this.smashing = true;
+            this.walkid = 1;
+            this.walkcycle = 5;
             this.atkcool = 0;
         }
     }
+    spriteAnim() {
+        if (this.walkcycle === 0) {
+            if (this.walkid === 1) {
+                this.walkid = 2;
+            } else {
+                this.walkid = 1;
+            }
+            this.walkcycle = 10;
+        }
+        this.walkcycle --;
+    }
+    update() {
+        this.updatePos();
+        this.spriteAnim();
+        this.attack();
+        this.draw();
+        if (this.atkcool < 40) {
+            this.atkcool++;
+        }
+        if (this.atkcool >= 20) {
+            this.smashing = false;
+        }
+    }
 }
-
-var testcollisionrect = function(a,b) {
-    return a.x < b.x + b.w &&
-    a.x + a.w > b.x &&
-    a.y < b.y + b.h &&
-    a.h + a.y > b.y;
-};
