@@ -37,4 +37,8 @@ class Enemy extends Entity {
     updatePos() {
         this.x -= this.spd;
     }
+    update() {
+        this.updatePos();
+        this.draw();
+    }
 }
