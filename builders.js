@@ -92,16 +92,29 @@ class Enemy extends Entity {
 //BUILD ENEMIES
 var spawnEnemy = function () {
     var selector = Math.random();
-    if (selector < 0.5) {
+    if (selector < 0.33) {
         var src1 = "img/axolotl1.png";
         var src2 = "img/axolotl2.png";
         var dmg = 1;
-    } else {
+        var w = 100;
+        var h = 50;
+        var spd = 10;
+    } else if (selector < 0.67) {
         var src1 = "img/wobbegong1.png";
         var src2 = "img/wobbegong2.png";
         var dmg = 2;
+        var w = 100;
+        var h = 50;
+        var spd = 9;
+    } else {
+        var src1 = "img/zebraDuiker1.png";
+        var src2 = "img/zebraDuiker2.png";
+        var dmg = 3;
+        var w = 100;
+        var h = 83.3;
+        var spd = 8;
     }
-    enemies.push (new Enemy(1070,Math.random()*(500-50),100,50,src1,src2,10,dmg));
+    enemies.push (new Enemy(1000+w,Math.random()*(500-h),w,h,src1,src2,spd,dmg));
 }
 
 //PLAYER SETUP
