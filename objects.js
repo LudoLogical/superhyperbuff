@@ -1,3 +1,5 @@
+var enemies = [];
+
 var myEntity = new Entity(10,250,10,10);
 
 var update = function () {
@@ -8,6 +10,10 @@ var update = function () {
 
 setInterval(update,25);
 
+var spawnEnemy = function () {
+    enemies.push (new Enemy(Math.random()*500, Math.random()*500, 15, 15, "", 12, 12))
+
+}
 /*
 ctx.fillStyle = "yellow";
 ctx.fillRect(0,0,500,500);
