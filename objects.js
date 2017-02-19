@@ -15,11 +15,11 @@ var update = function () {
     player.update();
     
     for (var i = 2; i <= player.hp; i += 2) {
-        ctx.drawImage(hearts[1],(10+(40*(i/2))),10,30,30);
+        ctx.drawImage(hearts[1],(10+(40*((i/2)-1))),10,30,30);
     }
     
     if (player.hp % 2 === 1) {
-        ctx.drawImage(hearts[0],(50+(40*(Math.floor(player.hp/2)))),10,30,30);
+        ctx.drawImage(hearts[0],(50+(40*((Math.floor(player.hp/2))-1))),10,30,30);
     }
     
     var percent = (score%10)/10;
