@@ -18,6 +18,8 @@ var spacepress = false;
 
 var timeInterval = 80;
 var enemies = [];
+var ambiances = [];
+var ambianceInterval = 40;
 
 var hearts = [new Image, new Image, new Image];
 hearts[0].src = "img/halfheart.png";

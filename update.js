@@ -48,6 +48,12 @@ var update = function () {
             }
         }
         heart.update();
+        for (var i = 0; i < ambiances.length; i++) {
+            ambiances[i].update();
+            if (ambiances[i].removeMark === true) {
+                ambiances.splice(i,1);
+            }
+        }
         octopus.update();
         player.update();
 
@@ -132,14 +138,19 @@ var update = function () {
             heartTimer --;
         }
         
+        if (ambianceInterval === 0) {
+            spawnAmbiance();
+            ambianceInterval = 40;
+        } else {
+            ambianceInterval --;
+        }
+        
         if (Math.floor(difficulty/20) > octovisits) {
             octovisits += 1;
             octopus.y = -200;
-            spawnEnemy();
-            spawnEnemy();
-            spawnEnemy();
-            spawnEnemy();
-            spawnEnemy();
+            for (var j = 0; j < 5; j++) {
+                spawnEnemy();
+            }
         }
     }
 }

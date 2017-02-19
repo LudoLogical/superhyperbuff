@@ -106,11 +106,6 @@ class Enemy extends Entity {
     }
 }
 
-var octopus = new Enemy(850,1000,200,200,"img/octopus1.png","img/octopus2.png",20,0);
-octopus.updatePos = function () {
-    this.y += this.spd;
-}
-
 //BUILD ENEMIES
 var spawnEnemy = function () {
     var selector = Math.random();
@@ -137,6 +132,44 @@ var spawnEnemy = function () {
         var spd = 8 + (difficulty/20);
     }
     enemies.push (new Enemy(1000+w,Math.random()*(500-h),w,h,src1,src2,spd,dmg));
+}
+
+var octopus = new Enemy(850,1000,200,200,"img/octopus1.png","img/octopus2.png",20,0);
+octopus.updatePos = function () {
+    this.y += this.spd;
+}
+
+//AMBIANCE SETUP
+class Ambiance extends Entity {
+    constructor(x,y,w,h,sprite,spd) {
+        super(x,y,w,h,sprite);
+        this.spd = spd;
+        this.removeMark = false;
+    }
+    updatePos() {
+        this.x -= this.spd;
+    }
+    draw() {
+        ctx.drawImage(this.sprite,this.x,this.y,this.w,this.h);
+    }
+    update() {
+        this.updatePos();
+        this.draw();
+        if (this.x < -this.w) {
+            this.removeMark = true;
+        }
+    }
+}
+
+//BUILD AMBIANCE
+var spawnAmbiance = function () {
+    var selector = Math.random();
+    if (selector < 0.5) {
+        var src = "img/asteroid.png";
+    } else {
+        var src = "img/star.png";
+    }
+    ambiances.push (new Ambiance(1000+30,Math.random()*(500-30),30,30,src,10));
 }
 
 //PLAYER SETUP
