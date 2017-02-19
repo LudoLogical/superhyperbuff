@@ -106,6 +106,11 @@ class Enemy extends Entity {
     }
 }
 
+var octopus = new Enemy(850,1000,200,200,"img/octopus1.png","img/octopus2.png",20,0);
+octopus.updatePos = function () {
+    this.y += this.spd;
+}
+
 //BUILD ENEMIES
 var spawnEnemy = function () {
     var selector = Math.random();

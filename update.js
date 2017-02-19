@@ -16,7 +16,7 @@ var update = function () {
         ctx.fillText("Red - Super Move (Kills)",250,310);
         ctx.fillText("Yellow - Level (Score)",250,340);
         ctx.fillText("Green - Time (Minutes)",250,370);
-        ctx.drawImage(deer1,525,20,450,450);
+        ctx.drawImage(deersplash,525,20,450,450);
         if (spacepress) {
             gameStart = true;
         }
@@ -24,16 +24,17 @@ var update = function () {
         ctx.fillStyle = "white";
         ctx.font = "50px 'Muli'";
         ctx.textAlign = "center";
-        ctx.fillText("Game Over",ctx.canvas.width/2,80);
+        ctx.fillText("Game Over",250,130);
         ctx.font = "20px 'Muli'";
-        ctx.fillText("Press [SPACE] to reload.",500,110);
+        ctx.fillText("Press [SPACE] to reload.",250,160);
         ctx.fillStyle = "#CCCCCC";
-        ctx.fillText("Level One Kills: " + kills[0],500,220);
-        ctx.fillText("Level Two Kills: " + kills[1],500,250);
-        ctx.fillText("Level Three Kills: " + kills[2],500,280);
-        ctx.fillText("Total Kills: " + (kills[0]+kills[1]+kills[2]),500,310);
-        ctx.fillText("Total Score: " + score,500,340);
-        ctx.fillText("Seconds Survived: " + Math.round(timeNow),500,370);
+        ctx.fillText("Level One Kills: " + kills[0],250,220);
+        ctx.fillText("Level Two Kills: " + kills[1],250,250);
+        ctx.fillText("Level Three Kills: " + kills[2],250,280);
+        ctx.fillText("Total Kills: " + (kills[0]+kills[1]+kills[2]),250,310);
+        ctx.fillText("Total Score: " + score,250,340);
+        ctx.fillText("Seconds Survived: " + Math.round(timeNow),250,370);
+        ctx.drawImage(octosplash,525,25,450,450);
         if (spacepress) {
             location.reload();
         }
@@ -47,6 +48,7 @@ var update = function () {
             }
         }
         heart.update();
+        octopus.update();
         player.update();
 
         for (var i = 2; i <= player.hp; i += 2) {
@@ -128,6 +130,16 @@ var update = function () {
             heartTimer = 1200;
         } else {
             heartTimer --;
+        }
+        
+        if (Math.floor(difficulty/20) > octovisits) {
+            octovisits += 1;
+            octopus.y = -200;
+            spawnEnemy();
+            spawnEnemy();
+            spawnEnemy();
+            spawnEnemy();
+            spawnEnemy();
         }
     }
 }

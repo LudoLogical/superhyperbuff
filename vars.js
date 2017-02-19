@@ -7,6 +7,7 @@ var timeNow = 0;
 var heartTimer = 1200;
 var gameStart = false;
 var difficulty = 0;
+var octovisits = 0;
 
 //GENERAL VARS
 var wpress = false;
@@ -24,8 +25,10 @@ hearts[1].src = "img/fullheart.png";
 hearts[2].src = "img/heartbubble.png";
 var bg = new Image();
 bg.src = "img/bg.png";
-var deer1 = new Image();
-deer1.src = "img/deersplash.png";
+var deersplash = new Image();
+deersplash.src = "img/deersplash.png";
+var octosplash = new Image();
+octosplash.src = "img/octopus1.png";
 
 //DOCUMENT FUNCTIONS SETUP
 document.onkeydown = function (e) {
