@@ -2,7 +2,7 @@ var doIntro = function () {
     ctx.fillStyle = "white";
     ctx.font = "50px 'Muli'";
     ctx.textAlign = "center";
-    ctx.fillText("Buff Things",250,130);
+    ctx.fillText("SuperHyperBuff",250,130);
     ctx.font = "20px 'Muli'";
     ctx.fillText("Press [SPACE] to begin.",250,160);
     ctx.fillStyle = "#CCCCCC";
