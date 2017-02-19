@@ -28,6 +28,17 @@ class Entity extends Area {
     }
 }
 
+class Enemy extends Entity {
+    constructor(x,y,w,h,sprite,spd,dmg) {
+        super(x,y,w,h,sprite);
+        this.spd = spd;
+        this.dmg = dmg;
+    }
+    updatePos() {
+        this.x -= this.spd;
+    }
+}
+
 var myEntity = new Entity(10,250,10,10);
 
 var update = function () {
