@@ -48,6 +48,7 @@ class Enemy extends Entity {
             ctx.drawImage(this.sprites[1],this.x,this.y,this.w,this.h);
         }
     }
+    
     spriteAnim() {
         if (this.walkcycle === 0) {
             if (this.walkid === 1) {
@@ -149,12 +150,16 @@ class Ambiance extends Entity {
 //BUILD AMBIANCE
 var spawnAmbiance = function () {
     var selector = Math.random();
-    if (selector < 0.5) {
-        var src = "img/asteroid.png";
-    } else {
+    if (selector < 0.50) {
         var src = "img/star.png";
+    } else if (selector < 0.75) {
+        var src = "img/rainbow.png";
+    } else if (selector < 0.875) {
+        var src = "img/shell.png";
+    } else {
+        var src = "img/asteroid.png";
     }
-    ambiances.push (new Ambiance(1000+30,Math.random()*(500-30),30,30,src,5));
+    ambiances.push (new Ambiance(1000+30,Math.random()*(500-30),30,30,src,4));
 }
 
 //PLAYER SETUP
