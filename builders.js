@@ -12,16 +12,27 @@ class Area {
 class Entity extends Area {
     constructor(x,y,w,h,sprite) {
         super(x,y,w,h);
-        this.sprite = new Image();
-        this.sprite.src = sprite;
+        if (sprite) {
+            this.sprite = new Image();
+            this.sprite.src = sprite;
+        }
     }
     draw() {
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.x,this.y,this.w,this.h); //x and y at centers of objs
+        ctx.drawImage(this.sprite,this.x,this.y,this.w,this.h); //x and y at centers of objs
     }
     update() {
         this.draw();
     }
+}
+
+//BUILD HEART
+var heart = new Entity(-30,Math.random()*(500-30),30,30,"img/heartbubble.png");
+heart.updatePos = function() {
+    heart.x -= 8;
+}
+heart.update = function() {
+    this.updatePos();
+    this.draw();
 }
 
 //ENEMIES SETUP
@@ -69,13 +80,28 @@ class Enemy extends Entity {
             if (testcollisionrect(this,player,true)) {
                 this.removeMark = true;
                 score += this.dmg;
-                kills += this.dmg;
+                kills ++;
             }
         } else if (testcollisionrect(this,player)) {
             player.hp -= this.dmg;
             this.removeMark = true;
         }
     }
+}
+
+//BUILD ENEMIES
+var spawnEnemy = function () {
+    var selector = Math.random();
+    if (selector < 0.5) {
+        var src1 = "img/axolotl1.png";
+        var src2 = "img/axolotl2.png";
+        var dmg = 1;
+    } else {
+        var src1 = "img/wobbegong1.png";
+        var src2 = "img/wobbegong2.png";
+        var dmg = 2;
+    }
+    enemies.push (new Enemy(1070,Math.random()*(500-50),100,50,src1,src2,10,dmg));
 }
 
 //PLAYER SETUP
@@ -155,5 +181,16 @@ class Player extends Entity {
         if (this.atkcool >= 20) {
             this.smashing = false;
         }
+        
+        if (testcollisionrect(this,heart)) {
+            this.hp += 2;
+            heart.x = -30;
+            if (this.hp > 24) {
+                this.hp = 24;
+            }
+        }
     }
 }
+
+//BUILD PLAYER
+var player = new Player(10,250,200,121.2,"img/armadilloWalk1.png","img/armadilloWalk2.png","img/armadilloAttack1.png","img/armadilloAttack2.png",3);

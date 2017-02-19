@@ -2,6 +2,8 @@
 var ctx = document.getElementById("ctx").getContext("2d");
 var score = 0;
 var kills = 0;
+var timeStart = Date.now();
+var heartTimer = 300;
 
 //GENERAL VARS
 var wpress = false;
