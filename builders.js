@@ -37,6 +37,10 @@ class Enemy extends Entity {
     updatePos() {
         this.x -= this.spd;
     }
+    draw() {
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.x/2,this.y/2,this.w,this.h); //x and y at centers of objs
+    }
     update() {
         this.updatePos();
         this.draw();
