@@ -1,17 +1,39 @@
 var enemies = [];
 var spawnEnemy = function () {
-    enemies.push (new Enemy(Math.random()*500,Math.random()*500,15,15,"",12,12));
+    enemies.push (new Enemy(1070,Math.random()*(500-50),70,50,"",12,12));
 }
+var timeInterval = 80;
 
-var myEntity = new Entity(10,250,10,10);
+var player = new Player(10,250,100,80,"",5);
 
 var update = function () {
-    ctx.clearRect(0,0,500,500);
+    ctx.clearRect(0,0,1000,500);
     for (var i = 0; i < enemies.length; i++) {
         enemies[i].update();
+        if (enemies[i].removeMark === true) {
+            enemies.splice(i,1);
+        }
     }
-    myEntity.x += 20;
-    myEntity.update();
+    player.update();
+    
+    ctx.fillRect(10,10,30,30);
+    ctx.fillRect(50,10,30,30);
+    ctx.fillRect(90,10,30,30);
+    ctx.fillRect(130,10,30,30);
+    ctx.fillRect(170,10,30,30);
+    ctx.fillRect(210,10,30,30);
+    ctx.fillRect(250,10,30,30);
+    ctx.fillRect(290,10,30,30);
+    ctx.fillRect(330,10,30,30);
+    ctx.fillRect(370,10,30,30);
+    
+    
+    if (timeInterval === 0) {
+        spawnEnemy();
+        timeInterval = 80;
+    } else {
+        timeInterval--;
+    }
 }
 
 spawnEnemy();
