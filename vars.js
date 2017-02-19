@@ -21,17 +21,6 @@ var enemies = [];
 var ambiances = [];
 var ambianceInterval = 40;
 
-var hearts = [new Image, new Image, new Image];
-hearts[0].src = "img/halfheart.png";
-hearts[1].src = "img/fullheart.png";
-hearts[2].src = "img/heartbubble.png";
-var bg = new Image();
-bg.src = "img/bg.png";
-var deersplash = new Image();
-deersplash.src = "img/deersplash.png";
-var octosplash = new Image();
-octosplash.src = "img/octopus1.png";
-
 //DOCUMENT FUNCTIONS SETUP
 document.onkeydown = function (e) {
     switch(e.keyCode) {
