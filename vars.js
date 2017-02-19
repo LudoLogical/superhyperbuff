@@ -1,9 +1,12 @@
 //GET CANVAS CONTEXT (FOR MANIPULAITON)
 var ctx = document.getElementById("ctx").getContext("2d");
 var score = 0;
-var kills = 0;
+var kills = [0,0,0];
 var timeStart = Date.now();
+var timeNow = 0;
 var heartTimer = 1200;
+var gameStart = false;
+var difficulty = 0;
 
 //GENERAL VARS
 var wpress = false;
@@ -19,6 +22,10 @@ var hearts = [new Image, new Image, new Image];
 hearts[0].src = "img/halfheart.png";
 hearts[1].src = "img/fullheart.png";
 hearts[2].src = "img/heartbubble.png";
+var bg = new Image();
+bg.src = "img/bg.png";
+var deer1 = new Image();
+deer1.src = "img/deersplash.png";
 
 //DOCUMENT FUNCTIONS SETUP
 document.onkeydown = function (e) {
