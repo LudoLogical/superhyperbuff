@@ -6,7 +6,6 @@ class Area {
         this.w = w;
         this.h = h;
     }
-    
 }
 
 //ENTITIES SETUP
@@ -27,17 +26,41 @@ class Entity extends Area {
 
 //ENEMIES SETUP
 class Enemy extends Entity {
-    constructor(x,y,w,h,sprite,spd,dmg) {
-        super(x,y,w,h,sprite);
+    constructor(x,y,w,h,sprite0,sprite1,spd,dmg) {
+        super(x,y,w,h);
+        this.sprites = [new Image, new Image];
+        this.sprites[0].src = sprite0;
+        this.sprites[1].src = sprite1;
         this.spd = spd;
         this.dmg = dmg;
         this.removeMark = false;
+        this.walkcycle = 10;
+        this.walkid = 1;
     }
     updatePos() {
         this.x -= this.spd;
     }
+    draw() {
+        if (this.walkid === 1) {
+            ctx.drawImage(this.sprites[0],this.x,this.y,this.w,this.h);
+        } else {
+            ctx.drawImage(this.sprites[1],this.x,this.y,this.w,this.h);
+        }
+    }
+    spriteAnim() {
+        if (this.walkcycle === 0) {
+            if (this.walkid === 1) {
+                this.walkid = 2;
+            } else {
+                this.walkid = 1;
+            }
+            this.walkcycle = 10;
+        }
+        this.walkcycle --;
+    }
     update() {
         this.updatePos();
+        this.spriteAnim();
         this.draw();
         if (this.x < -this.w) {
             this.removeMark = true;

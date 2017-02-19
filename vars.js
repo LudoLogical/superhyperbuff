@@ -9,6 +9,14 @@ var spress = false;
 var dpress = false;
 var spacepress = false;
 
+var timeInterval = 80;
+var enemies = [];
+
+var hearts = [new Image, new Image, new Image];
+hearts[0].src = "img/halfheart.png";
+hearts[1].src = "img/fullheart.png";
+hearts[2].src = "img/heartbubble.png";
+
 //DOCUMENT FUNCTIONS SETUP
 document.onkeydown = function (e) {
     switch(e.keyCode) {
