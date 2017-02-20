@@ -15,6 +15,8 @@ var doIntro = function () {
     ctx.drawImage(deersplash,525,20,450,450);
     if (spacepress) {
         gameStart = true;
+        timeStart = Date.now();
+        spawnEnemy();
     }
 }
 

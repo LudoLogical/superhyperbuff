@@ -58,5 +58,4 @@ var update = function () {
     }
 }
 
-spawnEnemy();
 setInterval(update,25);
