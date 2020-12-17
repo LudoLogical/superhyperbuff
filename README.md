@@ -1,2 +1,2 @@
-# Buff Things
+# SuperHyperBuff
 CodeDay: Winter 2017
